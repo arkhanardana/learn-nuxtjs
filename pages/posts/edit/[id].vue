@@ -57,7 +57,7 @@ const onSubmit = async (data: PostValues) => {
             },
           }"
         >
-          <Button type="submit" :disabled="isLoading" class="cursor-pointer">
+          <Button type="submit" :disabled="isLoading" class="cursor-pointer hover:bg-teal-500">
             <span v-if="isLoading">Updating...</span>
             <span v-else>Update</span>
           </Button>
