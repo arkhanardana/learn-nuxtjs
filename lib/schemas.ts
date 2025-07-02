@@ -10,3 +10,5 @@ export const postSchema = z.object({
     .trim()
     .min(3, { message: "Please input content minimal 3" }),
 });
+
+export type PostValues = z.infer<typeof postSchema>;
