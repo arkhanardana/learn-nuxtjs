@@ -1,6 +1,18 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import type { Post } from "./index.vue";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "~/components/ui/alert-dialog";
+import { toast } from "vue-sonner";
 
 const route = useRoute();
 const postId = route.params.id;
@@ -10,6 +22,19 @@ const {
   error,
   pending,
 } = await useFetch<Post>(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+
+const handleDelete = async (postId: string | string[]) => {
+  try {
+    const res = await $fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+      method: "DELETE",
+    });
+
+    toast.success("Post deleted successfully");
+  } catch (error) {
+    console.log(error);
+    toast.error("Error" + error);
+  }
+};
 </script>
 
 <template>
@@ -100,12 +125,36 @@ const {
 
         <div class="px-8 py-6 bg-slate-50 border-t border-slate-100">
           <div class="flex items-center justify-between">
-            <NuxtLink
-              :to="`/posts/edit/${postId}`"
-              class="flex items-center gap-2 text-slate-600 hover:text-teal-600 transition-colors"
-            >
-              <p class="text-black underline cursor-pointer">Edit Post</p>
-            </NuxtLink>
+            <div class="flex items-center justify-around gap-x-3">
+              <NuxtLink
+                :to="`/posts/edit/${postId}`"
+                class="flex items-center gap-2 text-slate-600 hover:text-teal-600 transition-colors"
+              >
+                <p class="text-black underline cursor-pointer">Edit Post</p>
+              </NuxtLink>
+
+              <AlertDialog>
+                <AlertDialogTrigger>
+                  <Button class="bg-red-600 hover:bg-red-500 cursor-pointer">Delete</Button>
+                </AlertDialogTrigger>
+
+                <AlertDialogContent>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                    <AlertDialogDescription>
+                      This action cannot be undone. This will permanently delete your post and
+                      remove the data from our servers.
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogAction class="bg-red-600 hover:bg-red-500 cursor-pointer"
+                      ><p @click="handleDelete(postId)">Delete</p></AlertDialogAction
+                    >
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </div>
 
             <div class="text-sm text-slate-500">User ID: {{ post?.userId }}</div>
           </div>

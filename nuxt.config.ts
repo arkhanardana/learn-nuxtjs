@@ -6,6 +6,9 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   pages: true,
   app: {
+    head: {
+      title: "Posts List",
+    },
     pageTransition: { name: "page", mode: "in-out" },
     layoutTransition: { name: "layout", mode: "out-in" },
   },

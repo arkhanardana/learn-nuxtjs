@@ -63,8 +63,7 @@ const onSubmit = async (data: PostValues) => {
               :disabled="isLoading"
               class="cursor-pointer hover:bg-teal-500"
             >
-              <span v-if="isLoading">Submitting...</span>
-              <span v-else>Submit</span>
+              {{ isLoading ? "Creating..." : "Create" }}
             </Button>
           </AutoForm>
         </CardContent>
