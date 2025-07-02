@@ -1,8 +1,8 @@
 <template>
-  <div class="sticky top-0 z-50">
+  <div class="sticky top-0 z-50 bg-white border-b-1 border-gray">
     <nav class="container mx-auto px-6 py-4 flex items-center justify-between">
       <NuxtLink
-        to="/"
+        to="/posts"
         class="text-xl text-teal-400 font-bold hover:text-primary transition-colors"
       >
         Posts

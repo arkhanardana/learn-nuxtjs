@@ -32,7 +32,7 @@ const {
       <div
         v-for="post in posts"
         :key="post.id"
-        class="px-7 py-6 bg-teal-600 rounded-2xl max-w-2xl"
+        class="px-7 py-6 bg-gradient-to-r from-teal-600 to-teal-400 rounded-2xl max-w-2xl"
       >
         <h1 class="text-white text-2xl font-bold">{{ post.title }}</h1>
         <p class="text-white/90 pb-2">{{ post.body }}</p>
