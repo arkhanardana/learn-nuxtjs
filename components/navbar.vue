@@ -17,25 +17,11 @@
           Home
         </NuxtLink>
         <NuxtLink
-          to="/"
+          to="/dashboard"
           class="text-gray-600 hover:text-primary transition-colors"
           active-class="text-primary font-semibold"
         >
-          About
-        </NuxtLink>
-        <NuxtLink
-          to="/"
-          class="text-gray-600 hover:text-primary transition-colors"
-          active-class="text-primary font-semibold"
-        >
-          Services
-        </NuxtLink>
-        <NuxtLink
-          to="/"
-          class="text-gray-600 hover:text-primary transition-colors"
-          active-class="text-primary font-semibold"
-        >
-          Contact
+          Dashboard
         </NuxtLink>
       </div>
 
