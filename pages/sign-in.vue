@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Github } from "lucide-vue-next";
 import { toast } from "vue-sonner";
 import { signIn } from "~/lib/auth-client.js";
 
@@ -73,13 +74,14 @@ const handleSignIn = async () => {
               @click="
                 async () => {
                   await signIn.social({
-                    provider: 'google',
-                    callbackURL: '/',
+                    provider: 'github',
+                    callbackURL: '/posts',
                   });
                 }
               "
             >
-              Login with Google
+              <Github />
+              Login with Github
             </Button>
           </div>
           <div class="mt-4 text-center text-sm">

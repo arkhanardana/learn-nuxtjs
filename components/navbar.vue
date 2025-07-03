@@ -17,6 +17,13 @@
           Home
         </NuxtLink>
         <NuxtLink
+          to="/posts"
+          class="text-gray-600 hover:text-primary transition-colors"
+          active-class="text-primary font-semibold"
+        >
+          Posts
+        </NuxtLink>
+        <NuxtLink
           to="/dashboard"
           class="text-gray-600 hover:text-primary transition-colors"
           active-class="text-primary font-semibold"
