@@ -6,20 +6,19 @@ import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { toast } from "vue-sonner";
 import { ref } from "vue";
+import { BASE_URL } from "~/lib/api";
 
 const route = useRoute();
-const id = route.params.id as string;
+const id = route.params.id;
 
 const isLoading = ref(false);
 
-const { data: postData, pending } = await useFetch<PostValues>(
-  `https://jsonplaceholder.typicode.com/posts/${id}`
-);
+const { data: postData, pending } = await useFetch<PostValues>(`${BASE_URL}${id}`);
 
 const onSubmit = async (data: PostValues) => {
   try {
     isLoading.value = true;
-    await $fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+    await $fetch(`${BASE_URL}${id}`, {
       method: "PUT",
       body: data,
     });
@@ -34,10 +33,10 @@ const onSubmit = async (data: PostValues) => {
 </script>
 
 <template>
-  <div class="container mx-auto px-4 py-8 max-w-xl">
+  <div class="container mx-auto px-4 py-8 max-w-xl h-screen">
     <Card v-if="!pending">
       <CardHeader>
-        <CardTitle>Edit Post #{{ id }}</CardTitle>
+        <CardTitle>Edit Post {{ id }}</CardTitle>
       </CardHeader>
 
       <CardContent>

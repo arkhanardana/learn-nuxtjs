@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import type { Post } from "./index.vue";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,19 +12,17 @@ import {
   AlertDialogTrigger,
 } from "~/components/ui/alert-dialog";
 import { toast } from "vue-sonner";
+import type { Post } from "~/types/types";
+import { BASE_URL } from "~/lib/api";
 
 const route = useRoute();
 const postId = route.params.id;
 
-const {
-  data: post,
-  error,
-  pending,
-} = await useFetch<Post>(`https://jsonplaceholder.typicode.com/posts/${postId}`);
+const { data: post, error, pending } = await useFetch<Post>(`${BASE_URL}${postId}`);
 
 const handleDelete = async (postId: string | string[]) => {
   try {
-    const res = await $fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`, {
+    const res = await $fetch(`${BASE_URL}${postId}`, {
       method: "DELETE",
     });
 

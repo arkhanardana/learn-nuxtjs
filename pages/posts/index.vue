@@ -1,16 +1,8 @@
 <script lang="ts" setup>
-export interface Post {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
+import { BASE_URL } from "~/lib/api";
+import type { Post } from "~/types/types";
 
-const {
-  data: posts,
-  error,
-  pending,
-} = await useFetch<Post[]>("https://jsonplaceholder.typicode.com/posts");
+const { data: posts, error, pending } = await useFetch<Post[]>(`${BASE_URL}`);
 </script>
 
 <template>
