@@ -9,25 +9,19 @@ const { data: session, error } = await useSession(useFetch);
       <Card class="mx-auto w-full">
         <CardHeader>
           <CardTitle class="text-2xl">Dashboard</CardTitle>
-          <CardDescription>Welcome back! Here's your account information</CardDescription>
+          <CardDescription>Welcome back! {{ session?.user.name }}</CardDescription>
         </CardHeader>
         <CardContent>
           <div v-if="session" class="space-y-4">
             <div class="flex items-center space-x-3">
               <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg
-                  class="w-6 h-6 text-gray-600"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
+                <NuxtImg
+                  :src="session.user.image ?? undefined"
+                  alt="Profile"
+                  width="400"
+                  height="400"
+                  class="rounded-lg"
+                />
               </div>
               <div>
                 <h3 class="font-semibold text-lg">{{ session.user.name }}</h3>
@@ -88,6 +82,8 @@ const { data: session, error } = await useSession(useFetch);
             <p class="text-sm text-gray-600 mb-4">Gagal memuat informasi sesi</p>
             <Button variant="outline" size="sm"> Coba lagi </Button>
           </div>
+
+          <div v-else>Gagal memuat konten.</div>
         </CardContent>
       </Card>
     </div>

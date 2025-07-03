@@ -22,7 +22,7 @@ const { data: post, error, pending } = await useFetch<Post>(`${BASE_URL}${postId
 
 const handleDelete = async (postId: string | string[]) => {
   try {
-    const res = await $fetch(`${BASE_URL}${postId}`, {
+    await $fetch(`${BASE_URL}${postId}`, {
       method: "DELETE",
     });
 
@@ -113,7 +113,7 @@ const handleDelete = async (postId: string | string[]) => {
 
         <!-- Content -->
         <div class="px-8 py-8">
-          <div class="prose prose-lg max-w-none">
+          <div class="max-w-none">
             <p class="text-slate-700 leading-relaxed text-lg">
               {{ post?.body }}
             </p>
@@ -161,19 +161,4 @@ const handleDelete = async (postId: string | string[]) => {
   </div>
 </template>
 
-<style scoped>
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.prose p {
-  animation: fadeIn 0.6s ease-out;
-}
-</style>
+<style scoped></style>
