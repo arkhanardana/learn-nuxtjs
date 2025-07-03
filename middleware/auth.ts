@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware(() => {
-  const isAuthenticated = ref(false);
-  if (!isAuthenticated.value) {
-    return navigateTo("/hai");
+  const { session, role } = useAuth();
+  if (!session.value || role.value !== "admin") {
+    return navigateTo("/posts");
   }
 });

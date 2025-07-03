@@ -28,6 +28,8 @@ const {
     <h1 v-if="error">Terjadi kesalahan saat fetching API</h1>
     <h1 v-if="pending">Loading....</h1>
 
+    <h1 v-if="posts?.length === 0">Data not found.</h1>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mx-auto">
       <div
         v-for="post in posts"

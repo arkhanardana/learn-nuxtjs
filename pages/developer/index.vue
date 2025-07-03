@@ -4,7 +4,7 @@ definePageMeta({
 });
 </script>
 <template>
-  <div>ini admin</div>
+  <div>ini developers</div>
 </template>
 
 <style></style>
