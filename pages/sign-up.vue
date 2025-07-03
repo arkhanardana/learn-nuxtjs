@@ -1,28 +1,25 @@
 <script lang="ts" setup>
 import { toast } from "vue-sonner";
 import { signUp } from "~/lib/auth-client";
-
-const email = ref("");
-const password = ref("");
-const name = ref("");
+import { signUpSchema, type SignUpValues } from "~/lib/schemas";
 
 const router = useRouter();
+const isLoading = ref(false);
+const schema = signUpSchema;
 
-const handleSignUp = async () => {
-  if (!email.value || !password.value || !name.value) {
-    toast.error("Please input those field");
-    return;
-  }
+const handleSignUp = async (data: SignUpValues) => {
   try {
+    isLoading.value = true;
+
     await signUp.email(
       {
-        email: email.value,
-        password: password.value,
-        name: name.value,
+        email: data.email,
+        password: data.password,
+        name: data.name,
       },
       {
         onSuccess: () => {
-          toast.success("Successfully to sign sign in");
+          toast.success("Successfully to sign up");
           router.push({
             path: "/sign-in",
           });
@@ -34,6 +31,8 @@ const handleSignUp = async () => {
     );
   } catch (error) {
     console.log(error);
+  } finally {
+    isLoading.value = false;
   }
 };
 </script>
@@ -47,33 +46,46 @@ const handleSignUp = async () => {
         </CardHeader>
         <CardContent>
           <div class="grid gap-4">
-            <div class="grid grid-cols-1 gap-4">
-              <div class="grid gap-2">
-                <Label for="name"> Name</Label>
-                <Input id="name" placeholder="Input your name" required v-model="name" />
-              </div>
-            </div>
-            <div class="grid gap-2">
-              <Label for="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                v-model="email"
-              />
-            </div>
-            <div class="grid gap-2">
-              <Label for="password">Password</Label>
-              <Input id="password" type="password" v-model="password" placeholder="******" />
-            </div>
-            <Button type="button" class="w-full" @click="handleSignUp"
-              >Create an account</Button
+            <AutoForm
+              class="space-y-4"
+              :schema="schema"
+              @submit="handleSignUp"
+              :field-config="{
+                name: {
+                  label: 'Name',
+                  inputProps: {
+                    placeholder: 'John Doe',
+                    type: 'text',
+                  },
+                },
+                email: {
+                  label: 'Email',
+                  inputProps: {
+                    placeholder: 'm@example.com',
+                    type: 'email',
+                  },
+                },
+                password: {
+                  label: 'Password',
+                  inputProps: {
+                    placeholder: '*******',
+                    type: 'password',
+                  },
+                },
+              }"
             >
+              <Button
+                type="submit"
+                :disabled="isLoading"
+                class="cursor-pointer hover:bg-teal-500 w-full"
+              >
+                {{ isLoading ? "Creating..." : "Create an account" }}
+              </Button>
+            </AutoForm>
           </div>
           <div class="mt-4 text-center text-sm">
             Already have an account?
-            <a href="/sign-in" class="underline"> Sign in </a>
+            <NuxtLink to="/sign-in" class="underline"> Sign in </NuxtLink>
           </div>
         </CardContent>
       </Card>

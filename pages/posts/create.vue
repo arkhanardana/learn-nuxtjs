@@ -1,9 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
 import { toast } from "vue-sonner";
-import { AutoForm } from "~/components/ui/auto-form";
-import { Button } from "~/components/ui/button";
-import { Card, CardHeader, CardTitle, CardContent } from "~/components/ui/card";
 import { BASE_URL } from "~/lib/api";
 import { postSchema, type PostValues } from "~/lib/schemas";
 

@@ -1,34 +1,39 @@
 <script setup lang="ts">
 import { Github } from "lucide-vue-next";
 import { toast } from "vue-sonner";
-import { signIn } from "~/lib/auth-client.js";
+import { signIn } from "~/lib/auth-client";
+import { signInSchema, type SignInValues } from "~/lib/schemas";
 
-const email = ref("");
-const password = ref("");
 const router = useRouter();
+const schema = signInSchema;
+const isLoading = ref(false);
 
-const handleSignIn = async () => {
-  if (!email.value || !password.value) {
-    toast.error("Please input those field");
-    return;
+const handleSignIn = async (data: SignInValues) => {
+  try {
+    isLoading.value = true;
+    await signIn.email(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          toast.success("Successfully to sign in");
+          router.push({
+            path: "/dashboard",
+          });
+        },
+        onError(context) {
+          console.log(context.error.message);
+          toast.error(context.error.message);
+        },
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  } finally {
+    isLoading.value = false;
   }
-  await signIn.email(
-    {
-      email: email.value,
-      password: password.value,
-    },
-    {
-      onSuccess: () => {
-        toast.success("Successfully to sign in");
-        router.push({
-          path: "/dashboard",
-        });
-      },
-      onError(context) {
-        console.log(context.error.message);
-      },
-    }
-  );
 };
 </script>
 
@@ -38,36 +43,39 @@ const handleSignIn = async () => {
       <Card class="mx-auto w-full">
         <CardHeader>
           <CardTitle class="text-2xl"> Login </CardTitle>
-          <CardDescription> Enter your email below to login to your account </CardDescription>
+          <CardDescription> Enter your credentials below to sign in </CardDescription>
         </CardHeader>
         <CardContent>
           <div class="grid gap-4">
-            <div class="grid gap-2">
-              <Label for="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                v-model="email"
-                required
-              />
-            </div>
-            <div class="grid gap-2">
-              <div class="flex items-center">
-                <Label for="password">Password</Label>
-                <a href="/forget-password" class="ml-auto inline-block text-sm underline">
-                  Forgot your password?
-                </a>
-              </div>
-              <Input
-                id="password"
-                type="password"
-                placeholder="password"
-                v-model="password"
-                required
-              />
-            </div>
-            <Button type="submit" class="w-full" @click="handleSignIn"> Login </Button>
+            <AutoForm
+              class="space-y-4"
+              :schema="schema"
+              @submit="handleSignIn"
+              :field-config="{
+                email: {
+                  label: 'Email',
+                  inputProps: {
+                    placeholder: 'm@example.com',
+                    type: 'email',
+                  },
+                },
+                password: {
+                  label: 'Password',
+                  inputProps: {
+                    placeholder: '*******',
+                    type: 'password',
+                  },
+                },
+              }"
+            >
+              <Button
+                type="submit"
+                :disabled="isLoading"
+                class="cursor-pointer hover:bg-teal-500 w-full"
+              >
+                {{ isLoading ? "Signing in..." : "Sign In" }}
+              </Button>
+            </AutoForm>
             <Button
               variant="outline"
               class="w-full"
@@ -81,12 +89,12 @@ const handleSignIn = async () => {
               "
             >
               <Github />
-              Login with Github
+              Sign In with Github
             </Button>
           </div>
           <div class="mt-4 text-center text-sm">
             Don't have an account?
-            <a href="/sign-up" class="underline"> Sign up </a>
+            <NuxtLink to="/sign-up" class="underline"> Sign up </NuxtLink>
           </div>
         </CardContent>
       </Card>
