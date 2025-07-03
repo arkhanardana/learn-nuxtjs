@@ -4,7 +4,6 @@ import { BASE_URL } from "~/lib/api";
 import { postSchema, type PostValues } from "~/lib/schemas";
 
 const isLoading = ref(false);
-const schema = postSchema;
 
 const onSubmit = async (data: PostValues) => {
   try {
@@ -36,7 +35,7 @@ const onSubmit = async (data: PostValues) => {
         <CardContent>
           <AutoForm
             class="space-y-4"
-            :schema="schema"
+            :schema="postSchema"
             @submit="onSubmit"
             :field-config="{
               title: {

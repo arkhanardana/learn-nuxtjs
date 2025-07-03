@@ -1,16 +1,5 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "~/components/ui/alert-dialog";
 import { toast } from "vue-sonner";
 import type { Post } from "~/types/types";
 import { BASE_URL } from "~/lib/api";

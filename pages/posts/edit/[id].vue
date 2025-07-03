@@ -1,11 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { postSchema, type PostValues } from "~/lib/schemas";
-import { AutoForm } from "~/components/ui/auto-form";
-import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { toast } from "vue-sonner";
-import { ref } from "vue";
 import { BASE_URL } from "~/lib/api";
 
 const route = useRoute();

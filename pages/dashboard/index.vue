@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import { signOut, useSession } from "~/lib/auth-client";
 const router = useRouter();
+
+definePageMeta({
+  layout: "dashboard",
+});
+
 const { data: session, error } = await useSession(useFetch);
 </script>
 <template>

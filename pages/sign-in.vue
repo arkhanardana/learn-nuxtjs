@@ -5,7 +5,6 @@ import { signIn } from "~/lib/auth-client";
 import { signInSchema, type SignInValues } from "~/lib/schemas";
 
 const router = useRouter();
-const schema = signInSchema;
 const isLoading = ref(false);
 
 const handleSignIn = async (data: SignInValues) => {
@@ -49,7 +48,7 @@ const handleSignIn = async (data: SignInValues) => {
           <div class="grid gap-4">
             <AutoForm
               class="space-y-4"
-              :schema="schema"
+              :schema="signInSchema"
               @submit="handleSignIn"
               :field-config="{
                 email: {

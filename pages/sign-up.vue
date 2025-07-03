@@ -5,7 +5,6 @@ import { signUpSchema, type SignUpValues } from "~/lib/schemas";
 
 const router = useRouter();
 const isLoading = ref(false);
-const schema = signUpSchema;
 
 const handleSignUp = async (data: SignUpValues) => {
   try {
@@ -48,7 +47,7 @@ const handleSignUp = async (data: SignUpValues) => {
           <div class="grid gap-4">
             <AutoForm
               class="space-y-4"
-              :schema="schema"
+              :schema="signUpSchema"
               @submit="handleSignUp"
               :field-config="{
                 name: {
