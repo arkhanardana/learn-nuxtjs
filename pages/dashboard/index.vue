@@ -7,6 +7,10 @@ definePageMeta({
   layout: "dashboard",
 });
 
+useHead({ 
+  title: "Dashboard",
+});
+
 const { data: session, error } = await useSession(useFetch);
 </script>
 <template>

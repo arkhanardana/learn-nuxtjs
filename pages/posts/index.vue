@@ -3,6 +3,10 @@ definePageMeta({
   layout: "dashboard",
 });
 
+useHead({
+  title: "List Posts",
+});
+
 import { BASE_URL } from "~/lib/api";
 import type { Post } from "~/types/types";
 

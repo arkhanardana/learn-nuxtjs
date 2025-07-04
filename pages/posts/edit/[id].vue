@@ -4,6 +4,10 @@ import { postSchema, type PostValues } from "~/lib/schemas";
 import { toast } from "vue-sonner";
 import { BASE_URL } from "~/lib/api";
 
+definePageMeta({
+  layout: "dashboard",
+});
+
 const route = useRoute();
 const id = route.params.id;
 
@@ -55,6 +59,9 @@ const onSubmit = async (data: PostValues) => {
           <Button type="submit" :disabled="isLoading" class="cursor-pointer hover:bg-teal-500">
             <span v-if="isLoading">Updating...</span>
             <span v-else>Update</span>
+          </Button>
+          <Button as-child variant="outline" class="ml-3">
+            <NuxtLink :to="`/posts/${id}`"> Back </NuxtLink>
           </Button>
         </AutoForm>
       </CardContent>

@@ -7,6 +7,10 @@ definePageMeta({
   layout: "auth",
 });
 
+useHead({
+  title: "Sign Up Page",
+});
+
 const router = useRouter();
 const isLoading = ref(false);
 

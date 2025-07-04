@@ -8,6 +8,10 @@ definePageMeta({
   layout: "auth",
 });
 
+useHead({
+  title: "Login Page",
+});
+
 const router = useRouter();
 const isLoading = ref(false);
 

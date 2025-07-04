@@ -3,9 +3,18 @@ import { useRoute } from "vue-router";
 import { toast } from "vue-sonner";
 import type { Post } from "~/types/types";
 import { BASE_URL } from "~/lib/api";
+import { formatDate } from "~/lib/utils";
+
+definePageMeta({
+  layout: "dashboard",
+});
 
 const route = useRoute();
 const postId = route.params.id;
+
+useHead({
+  title: `Post - ${postId}`,
+});
 
 const { data: post, error, pending } = await useFetch<Post>(`${BASE_URL}${postId}`);
 
@@ -18,7 +27,7 @@ const handleDelete = async (postId: string | string[]) => {
     toast.success("Post deleted successfully");
   } catch (error) {
     console.log(error);
-    toast.error("Error" + error);
+    toast.error(`Error: ${error}`);
   }
 };
 </script>
@@ -85,14 +94,13 @@ const handleDelete = async (postId: string | string[]) => {
         v-else
         class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
       >
-        <!-- Header -->
         <div class="px-8 py-6 border-b border-slate-100">
           <div class="flex items-center gap-3 text-sm text-slate-500 mb-3">
             <span class="px-3 py-1 bg-teal-50 text-teal-600 rounded-full font-medium">
               Post #{{ postId }}
             </span>
             <span>•</span>
-            <time>{{ new Date().toLocaleDateString() }}</time>
+            <time>{{ formatDate(new Date().toLocaleDateString()) }}</time>
           </div>
 
           <h1 class="text-3xl lg:text-4xl font-bold text-slate-900 leading-tight">
@@ -100,7 +108,6 @@ const handleDelete = async (postId: string | string[]) => {
           </h1>
         </div>
 
-        <!-- Content -->
         <div class="px-8 py-8">
           <div class="max-w-none">
             <p class="text-slate-700 leading-relaxed text-lg">

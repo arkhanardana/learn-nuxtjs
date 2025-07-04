@@ -3,6 +3,14 @@ import { toast } from "vue-sonner";
 import { BASE_URL } from "~/lib/api";
 import { postSchema, type PostValues } from "~/lib/schemas";
 
+definePageMeta({
+  layout: "dashboard",
+});
+
+useHead({
+  title: "Create Post Page",
+});
+
 const isLoading = ref(false);
 
 const onSubmit = async (data: PostValues) => {
@@ -60,6 +68,9 @@ const onSubmit = async (data: PostValues) => {
               class="cursor-pointer hover:bg-teal-500"
             >
               {{ isLoading ? "Creating..." : "Create" }}
+            </Button>
+            <Button as-child variant="outline" class="ml-3">
+              <NuxtLink to="/posts"> Back </NuxtLink>
             </Button>
           </AutoForm>
         </CardContent>
