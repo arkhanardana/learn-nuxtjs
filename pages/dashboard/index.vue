@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { signOut, useSession } from "~/lib/auth-client";
 const router = useRouter();
+import { formatDate } from "~/lib/utils";
 
 definePageMeta({
   layout: "dashboard",
@@ -21,7 +22,10 @@ const { data: session, error } = await useSession(useFetch);
             <div class="flex items-center space-x-3">
               <div class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
                 <NuxtImg
-                  :src="session.user.image ?? undefined"
+                  :src="
+                    session.user.image ||
+                    `https://ui-avatars.com/api/?name=${session.user.name.charAt(0)}`
+                  "
                   alt="Profile"
                   width="400"
                   height="400"
@@ -43,8 +47,14 @@ const { data: session, error } = await useSession(useFetch);
                   >
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-sm font-medium">Account Type</span>
+                  <span class="text-sm font-medium">Tipe Akun</span>
                   <span class="text-sm text-gray-600">User</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm font-medium">Dibuat pada</span>
+                  <span class="text-sm text-gray-600">{{
+                    formatDate(session.user.createdAt)
+                  }}</span>
                 </div>
               </div>
             </div>
