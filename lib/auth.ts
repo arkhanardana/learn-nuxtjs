@@ -3,6 +3,8 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
+const config = useRuntimeConfig();
+
 export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "mysql",
@@ -12,11 +14,11 @@ export const auth = betterAuth({
   },
   socialProviders: {
     github: {
-      clientId: process.env.GITHUB_CLIENT_ID as string,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      clientId: config.githubProvider.clientId,
+      clientSecret: config.githubProvider.clientSecret,
     },
   },
   emailVerification: {
-    autoSignInAfterVerification: false,
+    autoSignInAfterVerification: true,
   },
 });
