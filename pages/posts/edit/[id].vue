@@ -11,6 +11,10 @@ definePageMeta({
 const route = useRoute();
 const id = route.params.id;
 
+useHead({
+  title: `Edit Post - ${id}`,
+});
+
 const isLoading = ref(false);
 
 const { data: postData, pending } = await useFetch<PostValues>(`${BASE_URL}${id}`);
