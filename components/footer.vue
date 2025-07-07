@@ -8,9 +8,13 @@
         <div class="text-lg font-semibold">© {{ new Date().getFullYear() }} MyPost</div>
 
         <div class="flex space-x-4">
-          <NuxtLink to="/" class="hover:underline">Home</NuxtLink>
-          <NuxtLink to="/" class="hover:underline">About</NuxtLink>
-          <NuxtLink to="/" class="hover:underline">Contact</NuxtLink>
+          <NuxtLink to="/" class="hover:underline" active-class="font-semibold">Home</NuxtLink>
+          <NuxtLink to="/posts" class="hover:underline" active-class="font-semibold"
+            >Posts</NuxtLink
+          >
+          <NuxtLink to="/dashboard" class="hover:underline" active-class="font-semibold"
+            >Dashboard</NuxtLink
+          >
         </div>
       </div>
     </footer>

@@ -11,22 +11,22 @@
       <div class="hidden md:flex space-x-6 items-center">
         <NuxtLink
           to="/"
-          class="text-gray-600 hover:text-primary transition-colors"
-          active-class="text-primary font-semibold"
+          class="text-gray-600 hover:text-teal-600 transition-all duration-300 relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full"
+          active-class="text-teal-600 after:w-full"
         >
           Home
         </NuxtLink>
         <NuxtLink
           to="/posts"
-          class="text-gray-600 hover:text-primary transition-colors"
-          active-class="text-primary font-semibold"
+          class="text-gray-600 hover:text-teal-600 transition-all duration-300 relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full"
+          active-class="text-teal-600 after:w-full"
         >
           Posts
         </NuxtLink>
         <NuxtLink
           to="/dashboard"
-          class="text-gray-600 hover:text-primary transition-colors"
-          active-class="text-primary font-semibold"
+          class="text-gray-600 hover:text-teal-600 transition-all duration-300 relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-teal-500 after:transition-all after:duration-300 hover:after:w-full"
+          active-class="text-teal-600 after:w-full"
         >
           Dashboard
         </NuxtLink>
