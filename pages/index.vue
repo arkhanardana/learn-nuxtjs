@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useCounterStore } from "~/store/useCounter";
+import { useCounterStore } from "~/store/use-counter";
 
 definePageMeta({
   layout: "dashboard",

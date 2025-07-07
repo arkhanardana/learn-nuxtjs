@@ -1,13 +1,14 @@
 <script lang="ts" setup>
 import { signOut, useSession } from "~/lib/auth-client";
-const router = useRouter();
 import { formatDate } from "~/lib/utils";
+
+const router = useRouter();
 
 definePageMeta({
   layout: "dashboard",
 });
 
-useHead({ 
+useHead({
   title: "Dashboard",
 });
 
@@ -18,8 +19,10 @@ const { data: session, error } = await useSession(useFetch);
     <div class="w-full max-w-md">
       <Card class="mx-auto w-full">
         <CardHeader>
-          <CardTitle class="text-2xl">Dashboard</CardTitle>
-          <CardDescription>Welcome back! {{ session?.user.name }}</CardDescription>
+          <CardTitle class="text-2xl lg:text-3xl">Dashboard</CardTitle>
+          <CardDescription class="text-md font-semibold"
+            >Welcome {{ session?.user.name }}!</CardDescription
+          >
         </CardHeader>
         <CardContent>
           <div v-if="session" class="space-y-4">
