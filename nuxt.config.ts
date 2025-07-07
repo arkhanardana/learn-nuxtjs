@@ -24,6 +24,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: "Posts List",
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap",
+        },
+      ],
     },
     pageTransition: { name: "page", mode: "in-out" },
     layoutTransition: { name: "layout", mode: "out-in" },
