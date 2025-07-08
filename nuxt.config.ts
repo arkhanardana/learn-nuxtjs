@@ -14,8 +14,9 @@ export default defineNuxtConfig({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     },
+
     public: {
-      apiBase: "localhost:5000",
+      apiBase: process.env.NUXT_PUBLIC_BASE_URL,
     },
   },
   compatibilityDate: "2025-05-15",
@@ -28,6 +29,10 @@ export default defineNuxtConfig({
         {
           rel: "stylesheet",
           href: "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap",
+        },
+        {
+          rel: "icon",
+          href: "https://static.vecteezy.com/system/resources/previews/029/722/382/non_2x/notes-icon-in-trendy-flat-style-isolated-on-white-background-notes-silhouette-symbol-for-your-website-design-logo-app-ui-illustration-eps10-free-vector.jpg",
         },
       ],
     },
