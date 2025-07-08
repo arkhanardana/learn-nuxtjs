@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const formatDate = (date: string | Date) => {
+export const formatDate = (date: Date | string) => {
   return new Intl.DateTimeFormat("id-ID", {
     day: "numeric",
     month: "long",

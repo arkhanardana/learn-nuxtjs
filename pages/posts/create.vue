@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import { toTypedSchema } from "@vee-validate/zod";
+import { useForm } from "vee-validate";
 import { toast } from "vue-sonner";
-import { BASE_URL } from "~/lib/api";
 import { postSchema, type PostValues } from "~/lib/schemas";
 
 definePageMeta({
@@ -12,19 +13,28 @@ useHead({
 });
 
 const isLoading = ref<boolean>(false);
+const { BASE_URL } = useBaseUrl();
+
+const form = useForm<PostValues>();
 
 const onSubmit = async (data: PostValues) => {
   try {
     isLoading.value = true;
 
-    await $fetch(`${BASE_URL}`, {
+    await $fetch(`${BASE_URL}/posts`, {
       method: "POST",
       body: data,
     });
 
     toast.success("Post created successfully!");
+    form.resetForm({
+      values: {
+        title: "",
+        content: "",
+      },
+    });
   } catch (error) {
-    toast.error("Something went wrong.");
+    toast.error("Failed to create post.");
     console.error(error);
   } finally {
     isLoading.value = false;
@@ -81,6 +91,7 @@ const onSubmit = async (data: PostValues) => {
           <CardContent class="space-y-6">
             <AutoForm
               class="space-y-6"
+              :form="form"
               :schema="postSchema"
               @submit="onSubmit"
               :field-config="{
@@ -91,7 +102,7 @@ const onSubmit = async (data: PostValues) => {
                     type: 'text',
                   },
                 },
-                body: {
+                content: {
                   label: 'Content',
                   inputProps: {
                     placeholder: 'Write your post content here',

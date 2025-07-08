@@ -8,14 +8,21 @@ useHead({
 });
 
 import PostCard from "~/components/post-card.vue";
-import { BASE_URL } from "~/lib/api";
 import type { Post } from "~/types/types";
 
-const { data: posts, error, pending } = await useFetch<Post[]>(`${BASE_URL}`);
+const { BASE_URL } = useBaseUrl();
+
+const {
+  data: posts,
+  error,
+  pending,
+} = await useFetch<Post[]>(`${BASE_URL}/posts`, {
+  server: false,
+});
 </script>
 
 <template>
-  <div class="container mx-auto px-6 lg:px-10 py-6">
+  <div class="container mx-auto px-6 lg:px-10 py-9">
     <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4 mb-8">
       <div class="space-y-2">
         <h1
@@ -24,7 +31,7 @@ const { data: posts, error, pending } = await useFetch<Post[]>(`${BASE_URL}`);
           Posts List
         </h1>
         <p class="text-slate-600 dark:text-slate-400 text-sm lg:text-base">
-          Discover and manage your blog posts
+          Discover and manage your posts
         </p>
       </div>
 

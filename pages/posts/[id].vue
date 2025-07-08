@@ -2,7 +2,6 @@
 import { useRoute } from "vue-router";
 import { toast } from "vue-sonner";
 import type { Post } from "~/types/types";
-import { BASE_URL } from "~/lib/api";
 import CardDetail from "~/components/card-detail.vue";
 
 definePageMeta({
@@ -11,12 +10,19 @@ definePageMeta({
 
 const route = useRoute();
 const postId = route.params.id;
+const { BASE_URL } = useBaseUrl();
 
 useHead({
   title: `Post - ${postId}`,
 });
 
-const { data: post, error, pending } = await useFetch<Post>(`${BASE_URL}${postId}`);
+const {
+  data: post,
+  error,
+  pending,
+} = await useFetch<Post>(`${BASE_URL}/posts/${postId}`, {
+  server: false,
+});
 
 const handleDelete = async (postId: string | string[]) => {
   try {
@@ -91,6 +97,7 @@ const handleDelete = async (postId: string | string[]) => {
       </div>
 
       <CardDetail
+        v-if="post"
         :post="post as Post"
         :postId="postId"
         :onDelete="() => post?.id && handleDelete(String(post.id))"

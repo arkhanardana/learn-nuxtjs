@@ -42,7 +42,7 @@ const counter = useCounterStore();
         @click="counter.double"
         class="ml-4 px-4 py-2 bg-teal-500 items-center text-white rounded-lg cursor-pointer"
       >
-        * 2
+        x2
       </button>
       <h2 class="text-center text-lg font-semibold text-gray-800 line-clamp-2">
         Full Name: {{ fullName }}

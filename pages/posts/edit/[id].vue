@@ -2,7 +2,6 @@
 import { useRoute } from "vue-router";
 import { postSchema, type PostValues } from "~/lib/schemas";
 import { toast } from "vue-sonner";
-import { BASE_URL } from "~/lib/api";
 
 definePageMeta({
   layout: "dashboard",
@@ -10,6 +9,7 @@ definePageMeta({
 
 const route = useRoute();
 const id = route.params.id;
+const { BASE_URL } = useBaseUrl();
 
 useHead({
   title: `Edit Post - ${id}`,
@@ -54,7 +54,7 @@ const onSubmit = async (data: PostValues) => {
               label: 'Title',
               inputProps: { placeholder: 'Enter new title' },
             },
-            body: {
+            content: {
               label: 'Content',
               inputProps: { placeholder: 'Edit content here' },
             },
