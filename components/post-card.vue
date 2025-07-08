@@ -14,7 +14,7 @@ const truncateText = (text: string, maxLength: number = 150) => {
 <template>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     <div
-      v-for="post in posts"
+      v-for="post in posts.slice(0, 10)"
       :key="post.id"
       class="group relative overflow-hidden bg-gradient-to-br from-teal-600 via-teal-500 to-teal-400 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
     >
@@ -35,7 +35,7 @@ const truncateText = (text: string, maxLength: number = 150) => {
         </h2>
 
         <p class="text-white/90 text-sm lg:text-base leading-relaxed mb-6 flex-grow">
-          {{ truncateText(post.body) }}
+          {{ truncateText(post.content) }}
         </p>
 
         <div class="flex items-center justify-between mt-auto">

@@ -28,7 +28,7 @@ defineProps<{
     <div class="px-8 py-8">
       <div class="max-w-none">
         <p class="text-slate-700 leading-relaxed text-lg">
-          {{ post.body }}
+          {{ post.content }}
         </p>
       </div>
     </div>
